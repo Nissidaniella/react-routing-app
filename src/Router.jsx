@@ -1,27 +1,30 @@
 import React from 'react';
-import { BrowserRouter as Router, NavLink, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Routes, Route } from 'react-router-dom';
 import Home from './Home';
 import About from './About';
 import Contact from './Contact';
 import Services from './Services';
 import ServiceDetails from './ServiceDetails';
 
-function Router() {
+function AppRouter() {
   return (
     <Router>
       <nav>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/about">About</NavLink>
-        <NavLink to="/contact">Contact</NavLink>
-        <NavLink to="/services">Services</NavLink>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
+        <Link to="/services">Services</Link>
       </nav>
-      <Route exact path="/" component={Home} />
-      <Route path="/about" component={About} />
-      <Route path="/contact" component={Contact} />
-      <Route path="/services" component={Services} />
-      <Route path="/services/:id" component={ServiceDetails} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/services" element={<Services />}>
+          <Route path=":id" element={<ServiceDetails />} />
+        </Route>
+      </Routes>
     </Router>
   );
 }
 
-export default Router;
+export default AppRouter;
